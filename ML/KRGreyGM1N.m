@@ -10,26 +10,117 @@
 
 @implementation KRGreyGM1N (fixMaths)
 
+// Super faster to do sqrt()
 -(float)invSqrt:(float)x
 {
     float xhalf = 0.5f*x;
-    int i = *(int*)&x; // get bits for floating VALUE
-    i = 0x5f375a86- (i>>1); // gives initial guess y0
-    x = *(float*)&i; // convert bits BACK to float
-    x = x*(1.5f-xhalf*x*x); // Newton step, repeating increases accuracy
+    int i       = *(int*)&x;          // get bits for floating VALUE
+    i           = 0x5f375a86- (i>>1); // gives initial guess y0
+    x           = *(float*)&i;        // convert bits BACK to float
+    x           = x*(1.5f-xhalf*x*x); // Newton step, repeating increases accuracy
     return x;
 }
 
-// Solves that simultaneous equations
--(void)solveEquationsAtMatrixA:(NSArray *)_matrixA vectorB:(NSArray *)_vectorB
+-(NSMutableArray *)transposeMatrix:(NSArray *)_matrix
 {
+    /*
+     * @ 多維陣列要用多個 Array 互包來完成
+     */
+    if( !_matrix ) return nil;
+    NSMutableArray *_transposedMatrix = [[NSMutableArray alloc] initWithCapacity:0];
+    NSInteger _xCount = [_matrix count];
+    NSInteger _yCount = 0;
+    //如果第 1 個值為陣列
+    if( [[_matrix objectAtIndex:0] isKindOfClass:[NSArray class]] )
+    {
+        //即為 N 維陣列
+        _xCount = [[_matrix objectAtIndex:0] count];
+        _yCount = [_matrix count];
+    }
+    
+    // 1 維陣列
+    if( _yCount == 0 )
+    {
+        for( int x=0; x<_xCount; x++ )
+        {
+            [_transposedMatrix addObject:[[NSArray alloc] initWithObjects:[_matrix objectAtIndex:x], nil]];
+        }
+    }
+    else
+    {
+        for( int x=0; x<_xCount; x++ )
+        {
+            //轉置，所以 x 總長度為 _yCount
+            NSMutableArray *_newRows = [[NSMutableArray alloc] initWithCapacity:_yCount];
+            for( int y=0; y<_yCount; y++ )
+            {
+                //NSLog(@"x = %i, y = %i", x, y);
+                if( [[_matrix objectAtIndex:y] isKindOfClass:[NSArray class]] )
+                {
+                    [_newRows addObject:[[_matrix objectAtIndex:y] objectAtIndex:x]];
+                }
+                else
+                {
+                    [_newRows addObject:[_matrix objectAtIndex:y]];
+                }
+            }
+            [_transposedMatrix addObject:_newRows];
+        }
+    }
+    return _transposedMatrix;
+}
+
+-(NSMutableArray *)multiplyParentMatrix:(NSArray *)_parentMatrix childMatrix:(NSArray *)_childMatrix
+{
+    NSMutableArray *_combinedMatrix = [NSMutableArray new];
+    for( NSArray *_tRows in _parentMatrix )
+    {
+        NSMutableArray *_sumRows = [NSMutableArray new];
+        for( NSArray *_bRows in _childMatrix )
+        {
+            NSInteger _index = 0;
+            float _sum       = 0.0f;
+            for( NSNumber *_bValue in _bRows )
+            {
+                NSNumber *_tValue  = [_tRows objectAtIndex:_index];
+                _sum              += [_tValue floatValue] * [_bValue floatValue];
+                //NSLog(@"%f x %f", [_tValue floatValue], [_bValue floatValue]);
+                ++_index;
+            }
+            //NSLog(@"_sum %f \n\n", _sum);
+            [_sumRows addObject:[NSNumber numberWithFloat:_sum]];
+        }
+        [_combinedMatrix addObject:_sumRows];
+    }
+    return _combinedMatrix;
+}
+
+// 使用最小平方法來求方陣解聯立
+// Solves that simultaneous equations
+-(NSMutableArray *)solveEquationsAtMatrix:(NSArray *)_matrix outputs:(NSArray *)_outputs
+{
+    NSMutableArray *_solvedEquations = nil;
+    
+    // Formula is ( B^T x B )^-1 x B^T x Yn
+    NSMutableArray *_transposedMatrix = [self transposeMatrix:_matrix];
+    // 因為陣列取值的順序關係，用同一個轉置矩陣互乘運算即可達到同樣效果，但在手解式上就不能這麼做
+    // Doing ( B^T x B )
+    NSMutableArray *_squareMatrixes   = [self multiplyParentMatrix:_transposedMatrix childMatrix:_transposedMatrix];
+    //NSLog(@"_squareMatrixes : %@", _squareMatrixes);
+    
+    // Doing (B^T x Yn)
+    NSMutableArray *_bxY              = [self multiplyParentMatrix:_transposedMatrix childMatrix:_outputs];
+    NSArray *_yN                      = [[self transposeMatrix:_bxY] firstObject];
+    //NSLog(@"here B x Yn = %@", _bxY);
+    
     @autoreleasepool
     {
-        long int rows = [_matrixA count];
-        long int cols = [[_matrixA firstObject] count];
+        long int rows = [_squareMatrixes count];
+        long int cols = [[_squareMatrixes firstObject] count];
         double buffer[ rows * cols ]; // x 直欄(rows) y 橫列(clos)
         int i         = 0;
-        for( NSArray *_xRows in _matrixA )
+        // Transforms OC array into C array
+        for( NSArray *_xRows in _squareMatrixes )
         {
             for( NSNumber *_number in _xRows )
             {
@@ -39,41 +130,51 @@
         }
         
         // array, x 欄(行) y 列
-        la_object_t matrix = la_matrix_from_double_buffer(buffer, rows, cols, cols, LA_NO_HINT, LA_DEFAULT_ATTRIBUTES);
+        la_object_t matrix = la_matrix_from_double_buffer(buffer, rows, cols, cols, LA_NO_HINT, LA_ATTRIBUTE_ENABLE_LOGGING);
         
-        NSLog(@"rows %li", la_matrix_rows(matrix));
-        NSLog(@"cols %li", la_matrix_cols(matrix));
+        //NSLog(@"rows %li", la_matrix_rows(matrix));
+        //NSLog(@"cols %li", la_matrix_cols(matrix));
         
-        long int bRows     = [_vectorB count];
-        
-        NSLog(@"cols : %li", bRows);
-        
+        long int bRows     = [_yN count];
         long int bCols     = 1;
         double buffer2[ bRows * bCols ];
-        la_object_t vector = la_matrix_from_double_buffer(buffer2, bRows, bCols, bCols, LA_NO_HINT, LA_DEFAULT_ATTRIBUTES);
+        int j              = 0;
+        for( NSNumber *_outputValue in _yN )
+        {
+            buffer2[j] = [_outputValue doubleValue];
+            ++j;
+        }
         
-        NSLog(@"vector %@", vector.description);
+        la_object_t vector = la_matrix_from_double_buffer(buffer2, bRows, bCols, bCols, LA_NO_HINT, LA_ATTRIBUTE_ENABLE_LOGGING);
         
         //解出來的聯立解
         la_object_t solvedMatrix = la_solve(matrix, vector);
         
-        NSLog(@"solvedMatrix %@", solvedMatrix.description);
+        //NSLog(@"solvedMatrix %@", solvedMatrix.description);
         
         double solvedBuffer[ bRows * bCols ];
         
         //從Matrix物件 轉回 double[]
         la_status_t status = la_matrix_to_double_buffer(solvedBuffer, 1, solvedMatrix);
         
-        NSLog(@"status : %li", status);
+        //NSLog(@"status : %li", status);
         
-        if (status == LA_SUCCESS) {
+        if (status == LA_SUCCESS)
+        {
+            _solvedEquations = [NSMutableArray new];
+            for( int i=0; i<bRows * bCols; i++ )
+            {
+                [_solvedEquations addObject:[NSNumber numberWithDouble:solvedBuffer[i]]];
+            }
             NSLog(@"success: a:%f, b2:%f, b3:%f, b4:%f, b5:%f", solvedBuffer[0], solvedBuffer[1], solvedBuffer[2], solvedBuffer[3], solvedBuffer[4]);
-        }else{
+        }
+        else
+        {
             NSLog(@"Wrong");
         }
         
-        
     }
+    return _solvedEquations;
 }
 
 @end
@@ -135,7 +236,7 @@
             // Only first pattern need to calculate the Z value.
             if( _patternIndex == 0 && _xIndex > 0 )
             {
-                _zValue = -( ( 0.5f * _sum ) + ( 0.5f * [[_xPatterns objectAtIndex:(_xIndex - 1)] floatValue] ) );
+                _zValue = -( ( 0.5f * _sum ) + ( 0.5f * [[_xAgo objectAtIndex:(_xIndex - 1)] floatValue] ) );
                 [_zBoxes addObject:[NSNumber numberWithFloat:_zValue]];
             }
             ++_xIndex;
@@ -150,7 +251,7 @@
         // Deeply dimension
         NSInteger _xDimension       = [_agoBoxes count];
         int _startIndex             = 1;
-        // T, 轉置矩陣
+        // 轉置矩陣
         NSMutableArray *_allFactors = [NSMutableArray new];
         for( int _i = 0; _i < _zCount; ++_i )
         {
@@ -165,45 +266,18 @@
             [_allFactors addObject:_xT];
         }
         
-        
-        /*
-        // Test ...
-        NSMutableArray *_vectorB = [NSMutableArray new];
+        // Refactoring that x1 to be an output vector by following the Grey Theory GM(1, N) formula
+        NSMutableArray *_vectors = [NSMutableArray new];
         int i = -1;
         for( NSNumber *_n in [_patterns firstObject] )
         {
             ++i;
             if( i <= 0 ) continue;
-            [_vectorB addObject:_n];
+            [_vectors addObject:_n];
         }
         
-        [self solveEquationsAtMatrixA:_allFactors vectorB:_vectorB];
-        
-        return;
-        */
-        
-#error Waiting for implementing simultaneous equations of matrix.
-        
-        NSMutableArray *_rates = [NSMutableArray new];
-        NSArray *_x1           = [_patterns firstObject];
-        
-        for( NSArray *_factors in _allFactors )
-        {
-            int _xIndex = _startIndex;
-            float _sum  = 0.0f;
-            for( NSNumber *_xValue in _factors )
-            {
-                NSNumber *_outputValue =[_x1 objectAtIndex:_xIndex];
-                _sum += ( [_xValue floatValue] * [_outputValue floatValue] );
-                
-                NSLog(@"%f x %f", [_xValue floatValue], [_outputValue floatValue]);
-                ++_xIndex;
-            }
-            [_rates addObject:[NSNumber numberWithFloat:_sum]];
-            
-            NSLog(@"%f\n\n", _sum);
-        }
-        
+        NSMutableArray *_solvedEquations = [self solveEquationsAtMatrix:_allFactors outputs:@[_vectors]];
+        NSLog(@"_solvedEquations : %@", _solvedEquations);
         
     }
     
