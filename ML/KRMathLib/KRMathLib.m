@@ -1,17 +1,36 @@
 //
-//  KRGreyGM1N.m
-//  GreyTheory
+//  KRMathLib.m
 //
-//  Created by Kalvar Lin on 2015/9/3.
+//  Created by Kalvar Lin on 2015/9/19.
 //  Copyright (c) 2015年 Kalvar Lin. All rights reserved.
 //
 
-#import "KRGreyGM1N.h"
+#import "KRMathLib.h"
 
-@implementation KRGreyGM1N (fixMaths)
+@implementation KRMathLib
+
++(instancetype)sharedLib
+{
+    static dispatch_once_t pred;
+    static KRMathLib *_object = nil;
+    dispatch_once(&pred, ^{
+        _object = [[KRMathLib alloc] init];
+    });
+    return _object;
+}
+
+-(instancetype)init
+{
+    self = [super init];
+    if( self )
+    {
+        
+    }
+    return self;
+}
 
 // Super faster to do sqrt()
--(float)invSqrt:(float)x
+-(float)sqrt:(float)x
 {
     float xhalf = 0.5f*x;
     int i       = *(int*)&x;          // get bits for floating VALUE
@@ -20,6 +39,25 @@
     x           = x*(1.5f-xhalf*x*x); // Newton step, repeating increases accuracy
     return x;
 }
+
+@end
+
+@implementation KRMathLib (fixSort)
+
+-(NSArray *)sortArray:(NSArray *)_array byKey:(NSString *)_byKey ascending:(BOOL)_ascending
+{
+    NSSortDescriptor *_sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:_byKey ascending:_ascending];
+    return [_array sortedArrayUsingDescriptors:@[_sortDescriptor]];
+}
+
+-(void)sortMutableArray:(NSMutableArray *)_mutableArray byKey:(NSString *)_byKey ascending:(BOOL)_ascending
+{
+    [_mutableArray sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:_byKey ascending:_ascending]]];
+}
+
+@end
+
+@implementation KRMathLib (fixMatrix)
 
 -(NSMutableArray *)transposeMatrix:(NSArray *)_matrix
 {
@@ -95,6 +133,11 @@
     return _combinedMatrix;
 }
 
+-(NSMutableArray *)multiplyParentMatrix:(NSArray *)_parentMatrix childVector:(NSArray *)_childVector
+{
+    return [self multiplyParentMatrix:_parentMatrix childMatrix:@[_childVector]];
+}
+
 // 使用最小平方法來求方陣解聯立
 // Solves that simultaneous equations
 -(NSMutableArray *)solveEquationsAtMatrix:(NSArray *)_matrix outputs:(NSArray *)_outputs
@@ -166,130 +209,22 @@
             {
                 [_solvedEquations addObject:[NSNumber numberWithDouble:solvedBuffer[i]]];
             }
-            NSLog(@"success: a:%f, b2:%f, b3:%f, b4:%f, b5:%f", solvedBuffer[0], solvedBuffer[1], solvedBuffer[2], solvedBuffer[3], solvedBuffer[4]);
+            //NSLog(@"success: a:%f, b2:%f, b3:%f, b4:%f, b5:%f", solvedBuffer[0], solvedBuffer[1], solvedBuffer[2], solvedBuffer[3], solvedBuffer[4]);
         }
         else
         {
-            NSLog(@"Wrong");
+            //NSLog(@"Wrong");
         }
         
     }
     return _solvedEquations;
 }
 
+-(NSMutableArray *)gaussianEliminationAtMatrix:(NSArray *)_matrix
+{
+    // ... TODO
+    return nil;
+}
+
 @end
 
-@implementation KRGreyGM1N
-
-+(instancetype)sharedTheory
-{
-    static dispatch_once_t pred;
-    static KRGreyGM1N *_object = nil;
-    dispatch_once(&pred, ^
-    {
-        _object = [[KRGreyGM1N alloc] init];
-    });
-    return _object;
-}
-
--(instancetype)init
-{
-    self = [super init];
-    if( self )
-    {
-        _patterns = [NSMutableArray new];
-        _keys     = [NSMutableArray new];
-        _results  = [NSMutableDictionary new];
-    }
-    return self;
-}
-
-#pragma --mark Public Methods
--(void)addOutputs:(NSArray *)_someOutputs patternKey:(NSString *)_patternKey
-{
-    [_patterns insertObject:[_someOutputs copy] atIndex:0];
-    [_keys addObject:[_patternKey copy]];
-}
-
--(void)addPatterns:(NSArray *)_somePatterns patternKey:(NSString *)_patternKey
-{
-    [_patterns addObject:[_somePatterns copy]];
-    [_keys addObject:[_patternKey copy]];
-}
-
--(void)analyze
-{
-    NSMutableArray *_agoBoxes = [NSMutableArray new];
-    NSMutableArray *_zBoxes   = [NSMutableArray new];
-    int _patternIndex         = 0;
-    // x1 is the output, x2 ~ xn are the inputs.
-    for( NSArray *_xPatterns in _patterns )
-    {
-        NSMutableArray *_xAgo = [NSMutableArray new];
-        float _sum            = 0.0f;
-        float _zValue         = 0.0f;
-        int _xIndex           = 0;
-        for( NSNumber *_x in _xPatterns )
-        {
-            _sum += [_x floatValue];
-            [_xAgo addObject:[NSNumber numberWithFloat:_sum]];
-            // Only first pattern need to calculate the Z value.
-            if( _patternIndex == 0 && _xIndex > 0 )
-            {
-                _zValue = -( ( 0.5f * _sum ) + ( 0.5f * [[_xAgo objectAtIndex:(_xIndex - 1)] floatValue] ) );
-                [_zBoxes addObject:[NSNumber numberWithFloat:_zValue]];
-            }
-            ++_xIndex;
-        }
-        [_agoBoxes addObject:_xAgo];
-        ++_patternIndex;
-    }
-    
-    NSInteger _zCount = [_zBoxes count];
-    if( _zCount > 1 )
-    {
-        // Deeply dimension
-        NSInteger _xDimension       = [_agoBoxes count];
-        int _startIndex             = 1;
-        // 轉置矩陣
-        NSMutableArray *_allFactors = [NSMutableArray new];
-        for( int _i = 0; _i < _zCount; ++_i )
-        {
-            NSMutableArray *_xT = [NSMutableArray new];
-            [_xT addObject:[_zBoxes objectAtIndex:_i]];
-            // Start from x(1) to (n)
-            for( int _k = _startIndex; _k < _xDimension; ++_k )
-            {
-                // Hence, that _i needs to +1 to start in (1) to (n)
-                [_xT addObject:[[_agoBoxes objectAtIndex:_k] objectAtIndex:_i+1]];
-            }
-            [_allFactors addObject:_xT];
-        }
-        
-        // Refactoring that x1 to be an output vector by following the Grey Theory GM(1, N) formula
-        NSMutableArray *_vectors = [NSMutableArray new];
-        int i = -1;
-        for( NSNumber *_n in [_patterns firstObject] )
-        {
-            ++i;
-            if( i <= 0 ) continue;
-            [_vectors addObject:_n];
-        }
-        
-        NSMutableArray *_solvedEquations = [self solveEquationsAtMatrix:_allFactors outputs:@[_vectors]];
-        NSLog(@"_solvedEquations : %@", _solvedEquations);
-        
-    }
-    
-}
-
-
--(void)print
-{
-    
-}
-
-#pragma --mark Getters
-
-
-@end

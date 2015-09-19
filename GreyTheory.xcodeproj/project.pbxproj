@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8EE869021BACFF0A00802684 /* KRMathLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE868FF1BACFF0A00802684 /* KRMathLib.m */; };
+		8EE869031BACFF0A00802684 /* NSMutableArray+KRMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE869011BACFF0A00802684 /* NSMutableArray+KRMatrix.m */; };
+		8EE8690C1BACFF7000802684 /* KRGreyGM1N.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8690B1BACFF7000802684 /* KRGreyGM1N.m */; };
 		8EF4E70E1B987A770096433A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E70D1B987A770096433A /* main.m */; };
 		8EF4E7111B987A770096433A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E7101B987A770096433A /* AppDelegate.m */; };
 		8EF4E7141B987A770096433A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E7131B987A770096433A /* ViewController.m */; };
@@ -15,7 +18,6 @@
 		8EF4E71C1B987A770096433A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF4E71A1B987A770096433A /* LaunchScreen.xib */; };
 		8EF4E7281B987A770096433A /* GreyTheoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E7271B987A770096433A /* GreyTheoryTests.m */; };
 		8EF4E7331B987E180096433A /* KRGreyTheory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E7321B987E180096433A /* KRGreyTheory.m */; };
-		8EF4E7371B9886390096433A /* KRGreyGM1N.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E7361B9886390096433A /* KRGreyGM1N.m */; };
 		8EF4E7421B9C13D00096433A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF4E7411B9C13D00096433A /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8EE868FE1BACFF0A00802684 /* KRMathLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRMathLib.h; sourceTree = "<group>"; };
+		8EE868FF1BACFF0A00802684 /* KRMathLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRMathLib.m; sourceTree = "<group>"; };
+		8EE869001BACFF0A00802684 /* NSMutableArray+KRMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+KRMatrix.h"; sourceTree = "<group>"; };
+		8EE869011BACFF0A00802684 /* NSMutableArray+KRMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+KRMatrix.m"; sourceTree = "<group>"; };
+		8EE8690A1BACFF7000802684 /* KRGreyGM1N.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyGM1N.h; sourceTree = "<group>"; };
+		8EE8690B1BACFF7000802684 /* KRGreyGM1N.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyGM1N.m; sourceTree = "<group>"; };
+		8EE8690E1BAD204F00802684 /* KRGrey+Definition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KRGrey+Definition.h"; sourceTree = "<group>"; };
 		8EF4E7081B987A770096433A /* GreyTheory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreyTheory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF4E70C1B987A770096433A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EF4E70D1B987A770096433A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -45,8 +54,6 @@
 		8EF4E7271B987A770096433A /* GreyTheoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GreyTheoryTests.m; sourceTree = "<group>"; };
 		8EF4E7321B987E180096433A /* KRGreyTheory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyTheory.m; sourceTree = "<group>"; };
 		8EF4E7341B987E230096433A /* KRGreyTheory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyTheory.h; sourceTree = "<group>"; };
-		8EF4E7351B98862E0096433A /* KRGreyGM1N.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyGM1N.h; sourceTree = "<group>"; };
-		8EF4E7361B9886390096433A /* KRGreyGM1N.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyGM1N.m; sourceTree = "<group>"; };
 		8EF4E7411B9C13D00096433A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -69,6 +76,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8EE868FD1BACFF0A00802684 /* KRMathLib */ = {
+			isa = PBXGroup;
+			children = (
+				8EE868FE1BACFF0A00802684 /* KRMathLib.h */,
+				8EE868FF1BACFF0A00802684 /* KRMathLib.m */,
+				8EE869001BACFF0A00802684 /* NSMutableArray+KRMatrix.h */,
+				8EE869011BACFF0A00802684 /* NSMutableArray+KRMatrix.m */,
+			);
+			path = KRMathLib;
+			sourceTree = "<group>";
+		};
+		8EE869091BACFF7000802684 /* KRGreyModels */ = {
+			isa = PBXGroup;
+			children = (
+				8EE8690A1BACFF7000802684 /* KRGreyGM1N.h */,
+				8EE8690B1BACFF7000802684 /* KRGreyGM1N.m */,
+			);
+			path = KRGreyModels;
+			sourceTree = "<group>";
+		};
+		8EE8690D1BAD203B00802684 /* KRGrey+Definition */ = {
+			isa = PBXGroup;
+			children = (
+				8EE8690E1BAD204F00802684 /* KRGrey+Definition.h */,
+			);
+			path = "KRGrey+Definition";
+			sourceTree = "<group>";
+		};
 		8EF4E6FF1B987A770096433A = {
 			isa = PBXGroup;
 			children = (
@@ -133,10 +168,11 @@
 		8EF4E7311B987DD50096433A /* ML */ = {
 			isa = PBXGroup;
 			children = (
+				8EE8690D1BAD203B00802684 /* KRGrey+Definition */,
+				8EE868FD1BACFF0A00802684 /* KRMathLib */,
+				8EE869091BACFF7000802684 /* KRGreyModels */,
 				8EF4E7341B987E230096433A /* KRGreyTheory.h */,
 				8EF4E7321B987E180096433A /* KRGreyTheory.m */,
-				8EF4E7351B98862E0096433A /* KRGreyGM1N.h */,
-				8EF4E7361B9886390096433A /* KRGreyGM1N.m */,
 			);
 			path = ML;
 			sourceTree = "<group>";
@@ -241,11 +277,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EE8690C1BACFF7000802684 /* KRGreyGM1N.m in Sources */,
 				8EF4E7331B987E180096433A /* KRGreyTheory.m in Sources */,
 				8EF4E7141B987A770096433A /* ViewController.m in Sources */,
+				8EE869021BACFF0A00802684 /* KRMathLib.m in Sources */,
 				8EF4E7111B987A770096433A /* AppDelegate.m in Sources */,
 				8EF4E70E1B987A770096433A /* main.m in Sources */,
-				8EF4E7371B9886390096433A /* KRGreyGM1N.m in Sources */,
+				8EE869031BACFF0A00802684 /* NSMutableArray+KRMatrix.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

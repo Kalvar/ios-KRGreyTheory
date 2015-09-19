@@ -6,11 +6,13 @@
 //  Copyright (c) 2015年 Kalvar Lin. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "KRGreyGM1N.h"
 
 @interface KRGreyTheory : NSObject
 
 +(instancetype)sharedTheory;
 -(instancetype)init;
+
+-(KRGreyGM1N *)useGM1N;
 
 @end

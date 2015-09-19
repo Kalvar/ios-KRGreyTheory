@@ -14,8 +14,7 @@
 {
     static dispatch_once_t pred;
     static KRGreyTheory *_object = nil;
-    dispatch_once(&pred, ^
-    {
+    dispatch_once(&pred, ^{
         _object = [[KRGreyTheory alloc] init];
     });
     return _object;
@@ -31,5 +30,10 @@
     return self;
 }
 
+#pragma --mark GM1N
+-(KRGreyGM1N *)useGM1N
+{
+    return [KRGreyGM1N sharedTheory];
+}
 
 @end
