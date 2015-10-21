@@ -1,5 +1,5 @@
 //
-//  KRGreyGM1N.h
+//  KRGreyGM0N.h
 //  GreyTheory
 //
 //  Created by Kalvar Lin on 2015/9/3.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KRGreyLib.h"
 
-@interface KRGreyGM1N : NSObject
+@interface KRGreyGM0N : NSObject
 
 @property (nonatomic, strong) NSMutableArray *patterns;
 @property (nonatomic, strong) NSMutableArray *keys;

@@ -1,15 +1,15 @@
 //
-//  KRGreyGM1N.m
+//  KRGreyGM0N.m
 //  GreyTheory
 //
 //  Created by Kalvar Lin on 2015/9/3.
 //  Copyright (c) 2015年 Kalvar Lin. All rights reserved.
 //
 
-#import "KRGreyGM1N.h"
+#import "KRGreyGM0N.h"
 #import "NSMutableArray+KRMatrix.h"
 
-@implementation KRGreyGM1N (fixFactories)
+@implementation KRGreyGM0N (fixFactories)
 
 -(NSString *)_makeEquationNameByNumber:(NSInteger)_number
 {
@@ -18,14 +18,14 @@
 
 @end
 
-@implementation KRGreyGM1N
+@implementation KRGreyGM0N
 
 +(instancetype)sharedTheory
 {
     static dispatch_once_t pred;
-    static KRGreyGM1N *_object = nil;
+    static KRGreyGM0N *_object = nil;
     dispatch_once(&pred, ^{
-        _object = [[KRGreyGM1N alloc] init];
+        _object = [[KRGreyGM0N alloc] init];
     });
     return _object;
 }
@@ -62,22 +62,19 @@
 {
     NSArray *_ago      = [[KRGreyLib sharedLib] ago:_patterns];
     NSArray *_agoBoxes = [[_ago firstObject] copy];
-    NSArray *_zBoxes   = [[_ago lastObject] copy]; // GM1N 的 Z 是負生成，得於後續處理加入負號
+    NSArray *_zBoxes   = [[_ago lastObject] copy];
     _ago               = nil;
     NSInteger _zCount  = [_zBoxes count];
     if( _zCount > 1 )
     {
-        // Deeply dimension
+        // 依公式取出要用的 x2[1] 以後的 AGO matrixes，並且轉置矩陣
         NSInteger _xDimension       = [_agoBoxes count];
         int _startIndex             = 1;
-        // 建立含 Z 生成參數的 AGO 轉置矩陣
         NSMutableArray *_allFactors = [NSMutableArray new];
         for( int _i = 0; _i < _zCount; ++_i )
         {
-            NSMutableArray *_xT  = [NSMutableArray new];
-            NSNumber *_negativeZ = [NSNumber numberWithFloat:-( [[_zBoxes objectAtIndex:_i] floatValue] )];
-            [_xT addObject:_negativeZ];
-            // Start from x(1) to (n)
+            NSMutableArray *_xT = [NSMutableArray new];
+            // Start from x(2)[1] to x(n)[m]
             for( int _k = _startIndex; _k < _xDimension; ++_k )
             {
                 // Hence, that _i needs to +1 to start in (1) to (n)
@@ -86,48 +83,26 @@
             [_allFactors addObject:_xT];
         }
         
-        // Refactoring that x1 to be an output vector by following the Grey Theory GM(1, N) formula
-        NSMutableArray *_vectors = [NSMutableArray new];
-        int i = -1;
-        for( NSNumber *_n in [_patterns firstObject] )
-        {
-            ++i;
-            if( i <= 0 ) continue;
-            [_vectors addObject:_n];
-        }
-        
-        NSMutableArray *_solvedEquations = [_allFactors solveEquationsWithVector:_vectors];
+        NSMutableArray *_solvedEquations = [_allFactors solveEquationsWithVector:_zBoxes];
         //NSLog(@"_solvedEquations : %@", _solvedEquations);
         
-        // Formate to sub NSDictionary that Key / Value modes into results array
-        // Desc sorting the abs() equation values first, they named b(2) to b(n), but ignore the result (a) factory in this loop
-        NSMutableArray *_sorts     = [NSMutableArray new];
-        NSMutableArray *_sandboxes = [NSMutableArray new]; // Puts result (a) into here
-        NSInteger _count           = [_solvedEquations count];
+        // Desc sorting the abs() equation values
+        NSMutableArray *_sorts = [NSMutableArray new];
+        NSInteger _count       = [_solvedEquations count];
         for( NSInteger _i=0; _i<_count; _i++ )
         {
             CGFloat _equationValue            = fabsf([[_solvedEquations objectAtIndex:_i] floatValue]);
             NSMutableDictionary *_factoryInfo = [NSMutableDictionary new];
-            NSString *_equationName           = ( _i > 0 ) ? [self _makeEquationNameByNumber:(_i + 1)] : kKRGreyGmEquatioinResultName;
+            NSString *_equationName           = [self _makeEquationNameByNumber:(_i + 2)];
             [_factoryInfo setObject:_equationName forKey:kKRGreyGmEquationName];
             [_factoryInfo setObject:[NSNumber numberWithFloat:_equationValue] forKey:kKRGreyGmEquationAbsValue];
-            [_factoryInfo setObject:[NSNumber numberWithInteger:_i] forKey:kKRGreyGmEquationPatternIndex];
+            [_factoryInfo setObject:[NSNumber numberWithInteger:(_i + 1)] forKey:kKRGreyGmEquationPatternIndex];
             [_factoryInfo setObject:@0 forKey:kKRGreyGmEquationRanking];
-            if( _i > 0 )
-            {
-                [_sorts addObject:_factoryInfo];
-            }
-            else
-            {
-                [_sandboxes addObject:_factoryInfo];
-            }
+            [_sorts addObject:_factoryInfo];
         }
         
-        // Sortting by _sorts and without _sandboxes
+        // Asc sortting by _sorts
         [_analyzedResults addObjectsFromArray:[_sorts sortByKey:kKRGreyGmEquationAbsValue ascending:NO]];
-        
-        // Retrieving "a"
-        [_analyzedResults insertObject:[_sandboxes firstObject] atIndex:0];
         
         // Reset the ranking for all factories
         NSInteger _ranking = 0;
@@ -144,10 +119,7 @@
             [_mappingResults setObject:[_factoryInfo copy] forKey:_originalEquationName];
             
             // To setup influenceDegrees
-            if( _ranking > 0 )
-            {
-                [_influenceDegrees addObject:_originalEquationName];
-            }
+            [_influenceDegrees addObject:_originalEquationName];
             
             ++_ranking;
         }

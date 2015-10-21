@@ -220,11 +220,9 @@
     return _solvedEquations;
 }
 
--(NSMutableArray *)gaussianEliminationAtMatrix:(NSArray *)_matrix
+-(NSMutableArray *)gaussianEliminationAtMatrix:(NSMutableArray *)_matrix outputs:(NSArray *)_outputs
 {
-    // ... TODO
     return nil;
 }
 
 @end
-

@@ -36,4 +36,10 @@
     return [KRGreyGM1N sharedTheory];
 }
 
+#pragma --mark GM0n
+-(KRGreyGM0N *)useGM0N
+{
+    return [KRGreyGM0N sharedTheory];
+}
+
 @end

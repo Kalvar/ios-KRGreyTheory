@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E6349BD1BD7DC8E002F601C /* KRGreyGM0N.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6349BC1BD7DC8E002F601C /* KRGreyGM0N.m */; settings = {ASSET_TAGS = (); }; };
+		8E6349C01BD7DCB3002F601C /* KRGreyLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6349BF1BD7DCB3002F601C /* KRGreyLib.m */; settings = {ASSET_TAGS = (); }; };
 		8EE869021BACFF0A00802684 /* KRMathLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE868FF1BACFF0A00802684 /* KRMathLib.m */; };
 		8EE869031BACFF0A00802684 /* NSMutableArray+KRMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE869011BACFF0A00802684 /* NSMutableArray+KRMatrix.m */; };
 		8EE8690C1BACFF7000802684 /* KRGreyGM1N.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8690B1BACFF7000802684 /* KRGreyGM1N.m */; };
@@ -32,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E6349BB1BD7DC8E002F601C /* KRGreyGM0N.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyGM0N.h; sourceTree = "<group>"; };
+		8E6349BC1BD7DC8E002F601C /* KRGreyGM0N.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyGM0N.m; sourceTree = "<group>"; };
+		8E6349BE1BD7DCA4002F601C /* KRGreyLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KRGreyLib.h; sourceTree = "<group>"; };
+		8E6349BF1BD7DCB3002F601C /* KRGreyLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyLib.m; sourceTree = "<group>"; };
 		8EE868FE1BACFF0A00802684 /* KRMathLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRMathLib.h; sourceTree = "<group>"; };
 		8EE868FF1BACFF0A00802684 /* KRMathLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRMathLib.m; sourceTree = "<group>"; };
 		8EE869001BACFF0A00802684 /* NSMutableArray+KRMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+KRMatrix.h"; sourceTree = "<group>"; };
@@ -90,6 +96,10 @@
 		8EE869091BACFF7000802684 /* KRGreyModels */ = {
 			isa = PBXGroup;
 			children = (
+				8E6349BE1BD7DCA4002F601C /* KRGreyLib.h */,
+				8E6349BF1BD7DCB3002F601C /* KRGreyLib.m */,
+				8E6349BB1BD7DC8E002F601C /* KRGreyGM0N.h */,
+				8E6349BC1BD7DC8E002F601C /* KRGreyGM0N.m */,
 				8EE8690A1BACFF7000802684 /* KRGreyGM1N.h */,
 				8EE8690B1BACFF7000802684 /* KRGreyGM1N.m */,
 			);
@@ -221,7 +231,7 @@
 		8EF4E7001B987A770096433A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Kalvar Lin";
 				TargetAttributes = {
 					8EF4E7071B987A770096433A = {
@@ -279,9 +289,11 @@
 			files = (
 				8EE8690C1BACFF7000802684 /* KRGreyGM1N.m in Sources */,
 				8EF4E7331B987E180096433A /* KRGreyTheory.m in Sources */,
+				8E6349C01BD7DCB3002F601C /* KRGreyLib.m in Sources */,
 				8EF4E7141B987A770096433A /* ViewController.m in Sources */,
 				8EE869021BACFF0A00802684 /* KRMathLib.m in Sources */,
 				8EF4E7111B987A770096433A /* AppDelegate.m in Sources */,
+				8E6349BD1BD7DC8E002F601C /* KRGreyGM0N.m in Sources */,
 				8EF4E70E1B987A770096433A /* main.m in Sources */,
 				8EE869031BACFF0A00802684 /* NSMutableArray+KRMatrix.m in Sources */,
 			);
@@ -346,6 +358,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -412,6 +425,7 @@
 				INFOPLIST_FILE = GreyTheory/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kalvar.grey.theory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -423,6 +437,7 @@
 				INFOPLIST_FILE = GreyTheory/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kalvar.grey.theory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -441,6 +456,7 @@
 				);
 				INFOPLIST_FILE = GreyTheoryTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kalvar.grey.theory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GreyTheory.app/GreyTheory";
 			};
@@ -456,6 +472,7 @@
 				);
 				INFOPLIST_FILE = GreyTheoryTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kalvar.grey.theory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GreyTheory.app/GreyTheory";
 			};
