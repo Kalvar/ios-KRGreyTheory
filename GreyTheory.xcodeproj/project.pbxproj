@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E6349BD1BD7DC8E002F601C /* KRGreyGM0N.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6349BC1BD7DC8E002F601C /* KRGreyGM0N.m */; settings = {ASSET_TAGS = (); }; };
-		8E6349C01BD7DCB3002F601C /* KRGreyLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6349BF1BD7DCB3002F601C /* KRGreyLib.m */; settings = {ASSET_TAGS = (); }; };
+		8E21D43C1BD9470D00ADFBC7 /* KRGreyGM0N.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E21D4321BD9470C00ADFBC7 /* KRGreyGM0N.m */; settings = {ASSET_TAGS = (); }; };
+		8E21D43D1BD9470D00ADFBC7 /* KRGreyGM1N.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E21D4351BD9470C00ADFBC7 /* KRGreyGM1N.m */; settings = {ASSET_TAGS = (); }; };
+		8E21D43E1BD9470D00ADFBC7 /* KRGreyGM11.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E21D4381BD9470C00ADFBC7 /* KRGreyGM11.m */; settings = {ASSET_TAGS = (); }; };
+		8E21D4461BD9474F00ADFBC7 /* KRGreyLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E21D4451BD9474F00ADFBC7 /* KRGreyLib.m */; settings = {ASSET_TAGS = (); }; };
 		8EE869021BACFF0A00802684 /* KRMathLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE868FF1BACFF0A00802684 /* KRMathLib.m */; };
 		8EE869031BACFF0A00802684 /* NSMutableArray+KRMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE869011BACFF0A00802684 /* NSMutableArray+KRMatrix.m */; };
-		8EE8690C1BACFF7000802684 /* KRGreyGM1N.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE8690B1BACFF7000802684 /* KRGreyGM1N.m */; };
 		8EF4E70E1B987A770096433A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E70D1B987A770096433A /* main.m */; };
 		8EF4E7111B987A770096433A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E7101B987A770096433A /* AppDelegate.m */; };
 		8EF4E7141B987A770096433A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4E7131B987A770096433A /* ViewController.m */; };
@@ -34,16 +35,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8E6349BB1BD7DC8E002F601C /* KRGreyGM0N.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyGM0N.h; sourceTree = "<group>"; };
-		8E6349BC1BD7DC8E002F601C /* KRGreyGM0N.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyGM0N.m; sourceTree = "<group>"; };
-		8E6349BE1BD7DCA4002F601C /* KRGreyLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KRGreyLib.h; sourceTree = "<group>"; };
-		8E6349BF1BD7DCB3002F601C /* KRGreyLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyLib.m; sourceTree = "<group>"; };
+		8E21D4311BD9470C00ADFBC7 /* KRGreyGM0N.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyGM0N.h; sourceTree = "<group>"; };
+		8E21D4321BD9470C00ADFBC7 /* KRGreyGM0N.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyGM0N.m; sourceTree = "<group>"; };
+		8E21D4341BD9470C00ADFBC7 /* KRGreyGM1N.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyGM1N.h; sourceTree = "<group>"; };
+		8E21D4351BD9470C00ADFBC7 /* KRGreyGM1N.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyGM1N.m; sourceTree = "<group>"; };
+		8E21D4371BD9470C00ADFBC7 /* KRGreyGM11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyGM11.h; sourceTree = "<group>"; };
+		8E21D4381BD9470C00ADFBC7 /* KRGreyGM11.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyGM11.m; sourceTree = "<group>"; };
+		8E21D4441BD9474F00ADFBC7 /* KRGreyLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyLib.h; sourceTree = "<group>"; };
+		8E21D4451BD9474F00ADFBC7 /* KRGreyLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyLib.m; sourceTree = "<group>"; };
 		8EE868FE1BACFF0A00802684 /* KRMathLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRMathLib.h; sourceTree = "<group>"; };
 		8EE868FF1BACFF0A00802684 /* KRMathLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRMathLib.m; sourceTree = "<group>"; };
 		8EE869001BACFF0A00802684 /* NSMutableArray+KRMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+KRMatrix.h"; sourceTree = "<group>"; };
 		8EE869011BACFF0A00802684 /* NSMutableArray+KRMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+KRMatrix.m"; sourceTree = "<group>"; };
-		8EE8690A1BACFF7000802684 /* KRGreyGM1N.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRGreyGM1N.h; sourceTree = "<group>"; };
-		8EE8690B1BACFF7000802684 /* KRGreyGM1N.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRGreyGM1N.m; sourceTree = "<group>"; };
 		8EE8690E1BAD204F00802684 /* KRGrey+Definition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KRGrey+Definition.h"; sourceTree = "<group>"; };
 		8EF4E7081B987A770096433A /* GreyTheory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreyTheory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EF4E70C1B987A770096433A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,6 +85,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E21D4301BD9470C00ADFBC7 /* GM0N */ = {
+			isa = PBXGroup;
+			children = (
+				8E21D4311BD9470C00ADFBC7 /* KRGreyGM0N.h */,
+				8E21D4321BD9470C00ADFBC7 /* KRGreyGM0N.m */,
+			);
+			path = GM0N;
+			sourceTree = "<group>";
+		};
+		8E21D4331BD9470C00ADFBC7 /* GM1N */ = {
+			isa = PBXGroup;
+			children = (
+				8E21D4341BD9470C00ADFBC7 /* KRGreyGM1N.h */,
+				8E21D4351BD9470C00ADFBC7 /* KRGreyGM1N.m */,
+			);
+			path = GM1N;
+			sourceTree = "<group>";
+		};
+		8E21D4361BD9470C00ADFBC7 /* GM11 */ = {
+			isa = PBXGroup;
+			children = (
+				8E21D4371BD9470C00ADFBC7 /* KRGreyGM11.h */,
+				8E21D4381BD9470C00ADFBC7 /* KRGreyGM11.m */,
+			);
+			path = GM11;
+			sourceTree = "<group>";
+		};
+		8E21D4431BD9474F00ADFBC7 /* GreyLib */ = {
+			isa = PBXGroup;
+			children = (
+				8E21D4441BD9474F00ADFBC7 /* KRGreyLib.h */,
+				8E21D4451BD9474F00ADFBC7 /* KRGreyLib.m */,
+			);
+			path = GreyLib;
+			sourceTree = "<group>";
+		};
 		8EE868FD1BACFF0A00802684 /* KRMathLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,12 +135,10 @@
 		8EE869091BACFF7000802684 /* KRGreyModels */ = {
 			isa = PBXGroup;
 			children = (
-				8E6349BE1BD7DCA4002F601C /* KRGreyLib.h */,
-				8E6349BF1BD7DCB3002F601C /* KRGreyLib.m */,
-				8E6349BB1BD7DC8E002F601C /* KRGreyGM0N.h */,
-				8E6349BC1BD7DC8E002F601C /* KRGreyGM0N.m */,
-				8EE8690A1BACFF7000802684 /* KRGreyGM1N.h */,
-				8EE8690B1BACFF7000802684 /* KRGreyGM1N.m */,
+				8E21D4431BD9474F00ADFBC7 /* GreyLib */,
+				8E21D4301BD9470C00ADFBC7 /* GM0N */,
+				8E21D4331BD9470C00ADFBC7 /* GM1N */,
+				8E21D4361BD9470C00ADFBC7 /* GM11 */,
 			);
 			path = KRGreyModels;
 			sourceTree = "<group>";
@@ -287,14 +324,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EE8690C1BACFF7000802684 /* KRGreyGM1N.m in Sources */,
 				8EF4E7331B987E180096433A /* KRGreyTheory.m in Sources */,
-				8E6349C01BD7DCB3002F601C /* KRGreyLib.m in Sources */,
 				8EF4E7141B987A770096433A /* ViewController.m in Sources */,
+				8E21D43C1BD9470D00ADFBC7 /* KRGreyGM0N.m in Sources */,
 				8EE869021BACFF0A00802684 /* KRMathLib.m in Sources */,
+				8E21D43E1BD9470D00ADFBC7 /* KRGreyGM11.m in Sources */,
+				8E21D4461BD9474F00ADFBC7 /* KRGreyLib.m in Sources */,
 				8EF4E7111B987A770096433A /* AppDelegate.m in Sources */,
-				8E6349BD1BD7DC8E002F601C /* KRGreyGM0N.m in Sources */,
 				8EF4E70E1B987A770096433A /* main.m in Sources */,
+				8E21D43D1BD9470D00ADFBC7 /* KRGreyGM1N.m in Sources */,
 				8EE869031BACFF0A00802684 /* NSMutableArray+KRMatrix.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

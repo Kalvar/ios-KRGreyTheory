@@ -23,5 +23,6 @@
 -(NSMutableArray *)multiplyVector:(NSArray *)_vector;
 -(NSMutableArray *)solveEquationsWithMatrix:(NSArray *)_outputs;
 -(NSMutableArray *)solveEquationsWithVector:(NSArray *)_outputs;
+-(NSMutableArray *)solveEquationsByParameterMethodWithMatrix:(NSArray *)_outputs;
 
 @end

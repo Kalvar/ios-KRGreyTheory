@@ -149,12 +149,10 @@
     // 因為陣列取值的順序關係，用同一個轉置矩陣互乘運算即可達到同樣效果，但在手解式上就不能這麼做
     // Doing ( B^T x B )
     NSMutableArray *_squareMatrixes   = [self multiplyParentMatrix:_transposedMatrix childMatrix:_transposedMatrix];
-    //NSLog(@"_squareMatrixes : %@", _squareMatrixes);
     
     // Doing (B^T x Yn)
     NSMutableArray *_bxY              = [self multiplyParentMatrix:_transposedMatrix childMatrix:_outputs];
     NSArray *_yN                      = [[self transposeMatrix:_bxY] firstObject];
-    //NSLog(@"here B x Yn = %@", _bxY);
     
     @autoreleasepool
     {
@@ -192,15 +190,10 @@
         
         //解出來的聯立解
         la_object_t solvedMatrix = la_solve(matrix, vector);
-        
-        //NSLog(@"solvedMatrix %@", solvedMatrix.description);
-        
         double solvedBuffer[ bRows * bCols ];
         
         //從Matrix物件 轉回 double[]
         la_status_t status = la_matrix_to_double_buffer(solvedBuffer, 1, solvedMatrix);
-        
-        //NSLog(@"status : %li", status);
         
         if (status == LA_SUCCESS)
         {
@@ -218,6 +211,40 @@
         
     }
     return _solvedEquations;
+}
+
+// 參數法解 [a, b] 2 x N 維向量聯立方程式
+-(NSMutableArray *)solveEquationsByParameterMethodAtMatrix:(NSArray *)_matrix outputs:(NSArray *)_outputs
+{
+    float c          = 0.0f;
+    float d          = 0.0f;
+    float e          = 0.0f;
+    float f          = 0.0f;
+    NSInteger _index = 0;
+    for( NSArray *_rows in _matrix )
+    {
+        float _zValue  = fabsf( [[_rows firstObject] floatValue] );
+        float _xValue  = [[_outputs objectAtIndex:_index] floatValue];
+        c             += _zValue;
+        d             += _xValue;
+        e             += ( _zValue * _xValue );
+        f             += ( _zValue * _zValue );
+        ++_index;
+    }
+    
+    NSMutableArray *_equations = [NSMutableArray new];
+    if( [_matrix count] > 0 )
+    {
+        // Formula : a = ( c * d - (n - 1) * e ) / ( (n - 1) * f - c^2 )
+        float a = ( c * d - _index * e ) / ( _index * f - c * c );
+        
+        // Formula : b = ( d * f - c * e ) / ( (n - 1) * f - c^2 )
+        float b = ( d * f - c * e ) / ( _index * f - c * c );
+        
+        [_equations addObject:[NSNumber numberWithFloat:a]];
+        [_equations addObject:[NSNumber numberWithFloat:b]];
+    }
+    return _equations;
 }
 
 -(NSMutableArray *)gaussianEliminationAtMatrix:(NSMutableArray *)_matrix outputs:(NSArray *)_outputs

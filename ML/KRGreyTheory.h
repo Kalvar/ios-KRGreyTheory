@@ -8,6 +8,7 @@
 
 #import "KRGreyGM1N.h"
 #import "KRGreyGM0N.h"
+#import "KRGreyGM11.h"
 
 @interface KRGreyTheory : NSObject
 
@@ -16,5 +17,6 @@
 
 -(KRGreyGM1N *)useGM1N;
 -(KRGreyGM0N *)useGM0N;
+-(KRGreyGM11 *)useGM11;
 
 @end

@@ -118,7 +118,7 @@
             // To setup mappingResults dictionary to quickly search
             [_mappingResults setObject:[_factoryInfo copy] forKey:_originalEquationName];
             
-            // To setup influenceDegrees
+            // To setup influenceDegrees (排列影響因子的程度)
             [_influenceDegrees addObject:_originalEquationName];
             
             ++_ranking;

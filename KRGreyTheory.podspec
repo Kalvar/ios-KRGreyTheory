@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "KRGreyTheory"
-  s.version      = "1.1.0"
+  s.version      = "1.2.0"
   s.summary      = "Grey Theory on Machine Learning and Data Analysis."
   s.description  = <<-DESC
                    Machine Learning (マシンラーニング) in this project, it implemented the Grey Theory. This theory could use in big data analysis (データ分析), user behavior analysis (ユーザーの行動分析) and data mining (データマイニング) as well, especially find out what sub-factories impact on the real results via big data.

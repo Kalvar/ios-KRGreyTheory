@@ -50,4 +50,9 @@
     return [[KRMathLib sharedLib] solveEquationsAtMatrix:self outputs:@[_outputs]];
 }
 
+-(NSMutableArray *)solveEquationsByParameterMethodWithMatrix:(NSArray *)_outputs
+{
+    return [[KRMathLib sharedLib] solveEquationsByParameterMethodAtMatrix:self outputs:_outputs];
+}
+
 @end

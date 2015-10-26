@@ -9,7 +9,7 @@ KRGreyTheory could apply in setting pre-processing of weights / biases of neural
 
 ```ruby
 platform :ios, '8.0'
-pod "KRGreyTheory", "~> 1.1.0"
+pod "KRGreyTheory", "~> 1.2.0"
 ```
 
 ## How to use
@@ -43,9 +43,20 @@ KRGreyGM0N *gm0n = [[KRGreyTheory sharedTheory] useGM0N];
 [gm0n print];
 ```
 
+#### Using GM11 model
+``` objective-c
+KRGreyGM11 *gm11 = [[KRGreyTheory sharedTheory] useGM11];
+[gm11 addPattern:@533.0f patternKey:@"x1"];
+[gm11 addPattern:@665.0f patternKey:@"x2"];
+[gm11 addPattern:@655.0f patternKey:@"x3"];
+[gm11 addPattern:@740.0f patternKey:@"x4"];
+[gm11 forecast]; // To forecast x5 that number
+[gm11 print];
+```
+
 ## Version
 
-V1.1.0
+V1.2.0
 
 ## License
 

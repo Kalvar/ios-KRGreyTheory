@@ -42,4 +42,10 @@
     return [KRGreyGM0N sharedTheory];
 }
 
+#pragma --mark GM11
+-(KRGreyGM11 *)useGM11
+{
+    return [KRGreyGM11 sharedTheory];
+}
+
 @end

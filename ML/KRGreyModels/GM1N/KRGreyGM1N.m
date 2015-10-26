@@ -88,8 +88,9 @@
         
         // Refactoring that x1 to be an output vector by following the Grey Theory GM(1, N) formula
         NSMutableArray *_vectors = [NSMutableArray new];
+        NSArray *_x1             = [_patterns firstObject];
         int i = -1;
-        for( NSNumber *_n in [_patterns firstObject] )
+        for( NSNumber *_n in _x1 )
         {
             ++i;
             if( i <= 0 ) continue;
@@ -143,7 +144,7 @@
             // To setup mappingResults dictionary to quickly search
             [_mappingResults setObject:[_factoryInfo copy] forKey:_originalEquationName];
             
-            // To setup influenceDegrees
+            // To setup influenceDegrees (排列影響因子的程度)
             if( _ranking > 0 )
             {
                 [_influenceDegrees addObject:_originalEquationName];
