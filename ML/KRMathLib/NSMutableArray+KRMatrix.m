@@ -40,6 +40,11 @@
     return [[KRMathLib sharedLib] multiplyParentMatrix:self childVector:_vector];
 }
 
+-(double)sumMatrix:(NSArray *)_matrix
+{
+    return [[KRMathLib sharedLib] sumParentMatrix:self childMatrix:_matrix];
+}
+
 -(NSMutableArray *)solveEquationsWithMatrix:(NSArray *)_outputs
 {
     return [[KRMathLib sharedLib] solveEquationsAtMatrix:self outputs:_outputs];

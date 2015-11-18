@@ -30,6 +30,7 @@
 -(NSMutableArray *)transposeMatrix:(NSArray *)_matrix;
 -(NSMutableArray *)multiplyParentMatrix:(NSArray *)_parentMatrix childMatrix:(NSArray *)_childMatrix;
 -(NSMutableArray *)multiplyParentMatrix:(NSArray *)_parentMatrix childVector:(NSArray *)_childVector;
+-(double)sumParentMatrix:(NSArray *)_parentMatrix childMatrix:(NSArray *)_childMatrix;
 -(NSMutableArray *)solveEquationsAtMatrix:(NSArray *)_matrix outputs:(NSArray *)_outputs;
 -(NSMutableArray *)solveEquationsByParameterMethodAtMatrix:(NSArray *)_matrix outputs:(NSArray *)_outputs;
 -(NSMutableArray *)gaussianEliminationAtMatrix:(NSMutableArray *)_matrix outputs:(NSArray *)_outputs;

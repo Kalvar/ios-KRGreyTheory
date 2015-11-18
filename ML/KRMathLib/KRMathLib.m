@@ -138,6 +138,18 @@
     return [self multiplyParentMatrix:_parentMatrix childMatrix:@[_childVector]];
 }
 
+-(double)sumParentMatrix:(NSArray *)_parentMatrix childMatrix:(NSArray *)_childMatrix
+{
+    double _sum      = 0.0f;
+    NSInteger _index = 0;
+    for( NSNumber *_value in _parentMatrix )
+    {
+        _sum += [_value doubleValue] * [[_childMatrix objectAtIndex:_index] doubleValue];
+        ++_index;
+    }
+    return _sum;
+}
+
 // 使用最小平方法來求方陣解聯立
 // Solves that simultaneous equations
 -(NSMutableArray *)solveEquationsAtMatrix:(NSArray *)_matrix outputs:(NSArray *)_outputs
