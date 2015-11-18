@@ -21,7 +21,11 @@
 -(NSMutableArray *)transposeMatrix;
 -(NSMutableArray *)multiplyMatrix:(NSArray *)_matrix;
 -(NSMutableArray *)multiplyVector:(NSArray *)_vector;
+
 -(double)sumMatrix:(NSArray *)_matrix;
+-(NSArray *)multiplyByNumber:(double)_number;
+-(NSArray *)plusMatrix:(NSArray *)_matrix;
+
 -(NSMutableArray *)solveEquationsWithMatrix:(NSArray *)_outputs;
 -(NSMutableArray *)solveEquationsWithVector:(NSArray *)_outputs;
 -(NSMutableArray *)solveEquationsByParameterMethodWithMatrix:(NSArray *)_outputs;

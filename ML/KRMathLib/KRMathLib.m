@@ -150,6 +150,32 @@
     return _sum;
 }
 
+// ex : 0.5f * [1, 2]
+-(NSArray *)multiplyMatrix:(NSArray *)_matrix byNumber:(double)_number
+{
+    NSMutableArray *_array = [NSMutableArray new];
+    for( NSNumber *_value in _matrix )
+    {
+        double _newValue = _number * [_value doubleValue];
+        [_array addObject:[NSNumber numberWithDouble:_newValue]];
+    }
+    return _array;
+}
+
+// ex : [1, 2] + [3, 4]
+-(NSArray *)plusMatrix:(NSArray *)_matrix anotherMatrix:(NSArray *)_anotherMatrix
+{
+    NSMutableArray *_array = [NSMutableArray new];
+    NSInteger _index       = 0;
+    for( NSNumber *_value in _matrix )
+    {
+        double _newValue = [_value doubleValue] * [[_anotherMatrix objectAtIndex:_index] doubleValue];
+        [_array addObject:[NSNumber numberWithDouble:_newValue]];
+        ++_index;
+    }
+    return _array;
+}
+
 // 使用最小平方法來求方陣解聯立
 // Solves that simultaneous equations
 -(NSMutableArray *)solveEquationsAtMatrix:(NSArray *)_matrix outputs:(NSArray *)_outputs
