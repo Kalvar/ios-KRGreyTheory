@@ -13,7 +13,12 @@
 +(instancetype)sharedLib;
 -(instancetype)init;
 
+@end
+
+@interface KRMathLib (fixNumber)
+
 -(float)sqrt:(float)x;
+-(NSInteger)randomMax:(NSInteger)_maxValue min:(NSInteger)_minValue;
 
 @end
 
@@ -31,7 +36,9 @@
 -(NSMutableArray *)multiplyParentMatrix:(NSArray *)_parentMatrix childMatrix:(NSArray *)_childMatrix;
 -(NSMutableArray *)multiplyParentMatrix:(NSArray *)_parentMatrix childVector:(NSArray *)_childVector;
 
--(double)sumParentMatrix:(NSArray *)_parentMatrix childMatrix:(NSArray *)_childMatrix;
+-(double)sumMatrix:(NSArray *)_mainMatrix anotherMatrix:(NSArray *)_anotherMatrix;
+-(double)sumArray:(NSArray *)_array;
+
 -(NSArray *)multiplyMatrix:(NSArray *)_matrix byNumber:(double)_number;
 -(NSArray *)plusMatrix:(NSArray *)_matrix anotherMatrix:(NSArray *)_anotherMatrix;
 

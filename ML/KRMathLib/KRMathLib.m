@@ -29,6 +29,10 @@
     return self;
 }
 
+@end
+
+@implementation KRMathLib (fixNumber)
+
 // Super faster to do sqrt()
 -(float)sqrt:(float)x
 {
@@ -38,6 +42,11 @@
     x           = *(float*)&i;        // convert bits BACK to float
     x           = x*(1.5f-xhalf*x*x); // Newton step, repeating increases accuracy
     return x;
+}
+
+-(NSInteger)randomMax:(NSInteger)_maxValue min:(NSInteger)_minValue
+{
+    return ( arc4random() / ( RAND_MAX * 2.0f ) ) * (_maxValue - _minValue) + _minValue;;
 }
 
 @end
@@ -138,14 +147,24 @@
     return [self multiplyParentMatrix:_parentMatrix childMatrix:@[_childVector]];
 }
 
--(double)sumParentMatrix:(NSArray *)_parentMatrix childMatrix:(NSArray *)_childMatrix
+-(double)sumMatrix:(NSArray *)_mainMatrix anotherMatrix:(NSArray *)_anotherMatrix
 {
     double _sum      = 0.0f;
     NSInteger _index = 0;
-    for( NSNumber *_value in _parentMatrix )
+    for( NSNumber *_value in _mainMatrix )
     {
-        _sum += [_value doubleValue] * [[_childMatrix objectAtIndex:_index] doubleValue];
+        _sum += [_value doubleValue] * [[_anotherMatrix objectAtIndex:_index] doubleValue];
         ++_index;
+    }
+    return _sum;
+}
+
+-(double)sumArray:(NSArray *)_array
+{
+    double _sum = 0.0f;
+    for( NSNumber *_value in _array )
+    {
+        _sum += [_value doubleValue];
     }
     return _sum;
 }

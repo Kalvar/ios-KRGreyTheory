@@ -42,7 +42,7 @@
 
 -(double)sumMatrix:(NSArray *)_matrix
 {
-    return [[KRMathLib sharedLib] sumParentMatrix:self childMatrix:_matrix];
+    return [[KRMathLib sharedLib] sumMatrix:self anotherMatrix:_matrix];
 }
 
 -(NSArray *)multiplyByNumber:(double)_number
