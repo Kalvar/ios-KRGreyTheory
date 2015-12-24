@@ -188,7 +188,7 @@
     NSInteger _index       = 0;
     for( NSNumber *_value in _matrix )
     {
-        double _newValue = [_value doubleValue] * [[_anotherMatrix objectAtIndex:_index] doubleValue];
+        double _newValue = [_value doubleValue] + [[_anotherMatrix objectAtIndex:_index] doubleValue];
         [_array addObject:[NSNumber numberWithDouble:_newValue]];
         ++_index;
     }
