@@ -16,7 +16,7 @@ static NSString *kKRGreyGmEquationRanking            = @"ranking";
 // GM11
 static NSString *kKRGreyGm11K                        = @"k";
 static NSString *kKRGreyGm11OriginalValue            = @"original";
-static NSString *kKRGreyGm11ForecastValue            = @"forcecast";
+static NSString *kKRGreyGm11ForecastValue            = @"forecast";
 static NSString *kKRGreyGm11ErrorRate                = @"errorRate";
 static NSString *kKRGreyGm11AverageErrorRate         = @"averageErrorRate";
 static NSString *kKRGreyGm11ForecastResult           = @"forcecast";

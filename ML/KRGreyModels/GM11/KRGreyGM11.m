@@ -74,7 +74,6 @@
         //NSLog(@"_solvedEquations : %@", _solvedEquations);
         
         // 代入預測公式, 用現在的值去推測下一個值
-        NSMutableArray *_forecasts = [NSMutableArray new];
         __block float _sumError    = 0.0f;
         float _x1                  = [[_patterns firstObject] floatValue];
         float _alpha               = [[_solvedEquations firstObject] floatValue];
@@ -84,7 +83,6 @@
         [_patterns enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
         {
             float _forecastValue = ( 1 - powf(M_E, _alpha) ) * ( _x1 + ( _bValue / fabs(_alpha) ) ) * powf(M_E, fabs(_alpha) * _k);
-            [_forecasts addObject:[NSNumber numberWithFloat:_forecastValue]];
             // 同時算每筆預測誤差 (最後一筆不可計算)
             NSMutableDictionary *_factoryInfo = [NSMutableDictionary new];
             if( _k < _total )

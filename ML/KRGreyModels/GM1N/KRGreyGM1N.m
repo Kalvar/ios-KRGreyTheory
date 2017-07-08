@@ -109,6 +109,7 @@
         {
             CGFloat _equationValue            = fabsf([[_solvedEquations objectAtIndex:_i] floatValue]);
             NSMutableDictionary *_factoryInfo = [NSMutableDictionary new];
+            // ? b1 to bn : a
             NSString *_equationName           = ( _i > 0 ) ? [self _makeEquationNameByNumber:(_i + 1)] : kKRGreyGmEquatioinResultName;
             [_factoryInfo setObject:_equationName forKey:kKRGreyGmEquationName];
             [_factoryInfo setObject:[NSNumber numberWithFloat:_equationValue] forKey:kKRGreyGmEquationAbsValue];
